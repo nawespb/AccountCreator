@@ -1,5 +1,10 @@
 package gui;
 
+import features.PassGen;
+import features.SymbolSet;
+import features.Transliteration;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.Box;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -48,14 +53,24 @@ public final class MainFrame extends JFrame{
         
         //Labels
         
-        JLabel label1 = new JLabel("Name");
+        JLabel label1 = new JLabel("");
         label1.setSize(300,20 );
         label1.setLocation(50, 100);
         panel.add(label1);
-        JLabel label2 = new JLabel("Pass");
+        JLabel label2 = new JLabel("");
         label2.setSize(300,20 );
         label2.setLocation(50, 130);
         panel.add(label2);
+        
+        //ActionListeners
+        
+        gen.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                label1.setText(new Transliteration().translit(tField.getText()));
+                label2.setText(new PassGen().parse(8, SymbolSet.SIMPLE));
+            }
+        });
         
         setContentPane(panel);
         setSize(400, 300);
