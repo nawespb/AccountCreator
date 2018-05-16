@@ -1,18 +1,23 @@
 package features;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class Transliteration {
 
     public String translit (String text) {
         
-        return "";
+        HashMap<String, String> map = getTranslitCollection();
+        
+        for (String s: map.keySet()) {
+            text = text.replace(s, map.get(s));
+        }
+        
+        return text;
     }
     
-    private Map getTranslitCollection () {
+    private HashMap getTranslitCollection () {
         
-        Map<String, String> alphabet = new HashMap<>();
+        HashMap<String, String> alphabet = new HashMap<>();
         
         alphabet.put("а", "a");
         alphabet.put("б", "b");
@@ -24,6 +29,7 @@ public class Transliteration {
         alphabet.put("ж", "zh");
         alphabet.put("з", "z");
         alphabet.put("и", "i");
+        alphabet.put("й", "j");
         alphabet.put("к", "k");
         alphabet.put("л", "l");
         alphabet.put("м", "m");
@@ -56,6 +62,7 @@ public class Transliteration {
         alphabet.put("Ж", "ZH");
         alphabet.put("З", "Z");
         alphabet.put("И", "I");
+        alphabet.put("Й", "J");
         alphabet.put("К", "K");
         alphabet.put("Л", "L");
         alphabet.put("М", "M");
@@ -79,5 +86,6 @@ public class Transliteration {
         alphabet.put("Ю", "YU");
         alphabet.put("Я", "YA");
         
+        return alphabet;
     }
 }
