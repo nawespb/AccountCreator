@@ -1,5 +1,6 @@
 package features;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Transliteration {
@@ -12,7 +13,24 @@ public class Transliteration {
             text = text.replace(s, map.get(s));
         }
         
-        return text;
+        return formatName(text);
+    }
+    
+    private String formatName (String name) {
+        
+        String formattedName = "";
+        ArrayList<String> list = new ArrayList<>();
+        for (String word : name.split(" ")) {
+            list.add(word);
+        }
+        formattedName = list.get(0)+".";
+        list.remove(0);
+        if (!list.isEmpty()) {
+            for (int i = 0; i < list.size(); i++) {
+                formattedName += ((list.get(i).charAt(0))+"").toUpperCase();
+            }
+        }    
+        return formattedName;
     }
     
     private HashMap getTranslitCollection () {
