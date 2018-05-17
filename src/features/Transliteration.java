@@ -7,13 +7,16 @@ public class Transliteration {
 
     public String translit (String text) {
         
-        HashMap<String, String> map = getTranslitCollection();
-        
-        for (String s: map.keySet()) {
-            text = text.replace(s, map.get(s));
-        }
-        
-        return formatName(text);
+        if (!text.trim().isEmpty()) {
+            
+            HashMap<String, String> map = getTranslitCollection();
+
+            for (String s: map.keySet()) {
+                text = text.replace(s, map.get(s));
+            }
+
+            return formatName(text);
+        } return "";    
     }
     
     private String formatName (String name) {
@@ -66,9 +69,9 @@ public class Transliteration {
         alphabet.put("ч", "ch");
         alphabet.put("ш", "sh");
         alphabet.put("щ", "sch");
-        alphabet.put("ъ", "''");
+        alphabet.put("ъ", "");
         alphabet.put("ы", "y");
-        alphabet.put("ь", "'");
+        alphabet.put("ь", "");
         alphabet.put("э", "e");
         alphabet.put("ю", "yu");
         alphabet.put("я", "ya");
@@ -99,9 +102,9 @@ public class Transliteration {
         alphabet.put("Ч", "CH");
         alphabet.put("Ш", "SH");
         alphabet.put("Щ", "SCH");
-        alphabet.put("Ъ", "''");
+        alphabet.put("Ъ", "");
         alphabet.put("Ы", "Y");
-        alphabet.put("Ь", "'");
+        alphabet.put("Ь", "");
         alphabet.put("Э", "E");
         alphabet.put("Ю", "YU");
         alphabet.put("Я", "YA");
