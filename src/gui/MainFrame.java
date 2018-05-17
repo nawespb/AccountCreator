@@ -1,12 +1,14 @@
 package gui;
 
 import features.PassGen;
+import features.SaveInTheFile;
 import features.SymbolSet;
 import features.Transliteration;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Box;
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -20,6 +22,7 @@ public final class MainFrame extends JFrame{
     
     SymbolSet complexity;
     int lengthPass;
+    String str1 = "";
     
     public MainFrame() {
         
@@ -28,12 +31,21 @@ public final class MainFrame extends JFrame{
         JPanel panel = new JPanel();
         panel.setLayout(null);
         
+        //Icons
+        
+        ImageIcon icon = new ImageIcon("D:\\257831.png");
+
         //Buttons
         
         JButton gen = new JButton("Gen Account");
-        gen.setSize(200, 40);
-        gen.setLocation(100, 200);
+        gen.setSize(180, 40);
+        gen.setLocation(65, 200);
         panel.add(gen);
+        JButton save = new JButton("Save");
+        save.setSize(70, 40);
+        save.setLocation(265, 200);
+        panel.add(save);
+        
         
         //Box with radiobuttons
         
@@ -71,7 +83,8 @@ public final class MainFrame extends JFrame{
         
         JTextArea area = new JTextArea();
         area.setSize(300,60 );
-        area.setLocation(50, 125);
+        area.setLocation(50, 105);
+        area.setEditable(false);
         panel.add(area);
         
         //ActionListeners
@@ -88,14 +101,28 @@ public final class MainFrame extends JFrame{
                 } catch (NumberFormatException er){
                     JOptionPane.showMessageDialog(rootPane, "В поле \"Длина пароля\" необходимо ввести число!");
                 }
-        
-                String str = (new Transliteration().translit(tField.getText()))+"\n"+(new PassGen().parse(lengthPass, complexity));
+                
+                String str = (new Transliteration().translit(tField.getText()))+System.lineSeparator()+(new PassGen().parse(lengthPass, complexity));
                 area.setText(str);
-                area.setEditable(false);
+                
+                
             }
         });
         
+        
+        
+        save.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String saveText = area.getText();
+                new SaveInTheFile().saver(saveText);
+            }
+        });
+        
+        
+        setLocationRelativeTo(null);
+        setResizable(false);
         setContentPane(panel);
-        setSize(400, 300);
+        setSize(410, 300);
     }
 }

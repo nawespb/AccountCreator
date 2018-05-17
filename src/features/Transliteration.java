@@ -20,10 +20,12 @@ public class Transliteration {
         
         String formattedName = "";
         ArrayList<String> list = new ArrayList<>();
-        for (String word : name.split(" ")) {
+        for (String word : name.trim().split(" ")) {
+            if (word.isEmpty()) continue;
             list.add(word);
         }
         formattedName = list.get(0)+".";
+        formattedName = formattedName.substring(0, 1).toUpperCase() + formattedName.substring(1, formattedName.length());
         list.remove(0);
         if (!list.isEmpty()) {
             for (int i = 0; i < list.size(); i++) {
