@@ -6,6 +6,8 @@ import features.SymbolSet;
 import features.Transliteration;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import javax.swing.Box;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -110,8 +112,25 @@ public final class MainFrame extends JFrame{
         save.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String saveText = area.getText();
-                new SaveInTheFile().saver(saveText, new Transliteration().translit(tField.getText()));
+                if (!area.getText().isEmpty()) {
+                    String saveText = area.getText();
+                    new SaveInTheFile().saver(saveText, new Transliteration().translit(tField.getText()));
+                } else JOptionPane.showMessageDialog(rootPane, "Перед сохранением необходимо сгенерировать пароль и ввести Имя");
+            }
+        });
+        
+        config.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+                String result = JOptionPane.showInputDialog(rootPane, "ВВедите путь");
+//                result.replace("\\", "\\\\");
+                try {
+                    new SaveInTheFile().setConfig(result);
+                } catch (IOException ex) {
+                    System.out.println("Файл не сохранен");
+                    ex.printStackTrace();
+                }
             }
         });
         
