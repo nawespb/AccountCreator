@@ -45,6 +45,7 @@ public final class MainFrame extends JFrame{
         config.setSize(50, 40);
         config.setLocation(305, 200);
         panel.add(config);
+        
         //Box with radiobuttons
         
         Box box = Box.createVerticalBox();
