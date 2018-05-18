@@ -123,7 +123,7 @@ public final class MainFrame extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 
-                String result = JOptionPane.showInputDialog(rootPane, "ВВедите путь");
+                String result = JOptionPane.showInputDialog(rootPane, new File(".").getAbsolutePath().replace(".", "AccountCreater\\resources\\config.properties"));
 //                result.replace("\\", "\\\\");
                 try {
                     new SaveInTheFile().setConfig(result);

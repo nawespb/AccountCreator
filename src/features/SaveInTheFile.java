@@ -51,7 +51,7 @@ public class SaveInTheFile {
             prop.store(out, null);
             out.close();
         } catch (FileNotFoundException fe){
-            System.out.println("Ошибка в программе: файла " + PATH_TO_PROPERTIES + " не обнаружено");
+            System.out.println("Ошибка в программе: файл " + PATH_TO_PROPERTIES + " не обнаружено");
             fe.printStackTrace();
         }
     }
