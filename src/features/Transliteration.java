@@ -3,33 +3,43 @@ package features;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+//Класс для транслитерации строки и вывода в форматированном виде
 public class Transliteration {
-
+    
+    //Метод, возвращающий строку после транслитерации и форматирования
     public String translit (String text) {
         
         if (!text.trim().isEmpty()) {
             
             HashMap<String, String> map = getTranslitCollection();
-
+            //Замена символов по установленным правилам транслитерации
             for (String s: map.keySet()) {
                 text = text.replace(s, map.get(s));
             }
 
+            //Форматирование полученного результата
             return formatName(text);
         } return "";    
     }
     
+    //Метод для форматирования текста, возвращает форматированную строку
     private String formatName (String name) {
         
         String formattedName = "";
         ArrayList<String> list = new ArrayList<>();
+        
+        //Разделение строки на фрагменты по разделителю "пробел" и последующее добавление их в коллекцию
         for (String word : name.trim().split(" ")) {
             if (word.isEmpty()) continue;
             list.add(word);
         }
+        //Выделение первого фрагмента (слова)
         formattedName = list.get(0)+".";
-        formattedName = formattedName.substring(0, 1).toUpperCase() + formattedName.substring(1, formattedName.length());
+        //Перевод первой буквы в верхний регистр и последующих в нижний
+        formattedName = formattedName.substring(0, 1).toUpperCase() + formattedName.substring(1, formattedName.length()).toLowerCase();
+        //Удаление первого фрагмента из коллекции
         list.remove(0);
+        //Добавление первых символов последующих фрагментов с переводом их в верхний регистр
         if (!list.isEmpty()) {
             for (int i = 0; i < list.size(); i++) {
                 formattedName += ((list.get(i).charAt(0))+"").toUpperCase();
@@ -38,8 +48,10 @@ public class Transliteration {
         return formattedName;
     }
     
+    //Метод, возвращающий коллекцию с сопоставлением символов для транслитерации
     private HashMap getTranslitCollection () {
         
+        //Коллекция с сопоставлением символов для транслитерации
         HashMap<String, String> alphabet = new HashMap<>();
         
         alphabet.put("а", "a");

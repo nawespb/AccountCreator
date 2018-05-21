@@ -19,6 +19,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+//Пользовательский интерфейс
 public final class MainFrame extends JFrame{
     
     SymbolSet complexity;
@@ -104,7 +105,7 @@ public final class MainFrame extends JFrame{
                 
                 if (lengthPass>3) {
                     String str = "";
-                    str = (new Transliteration().translit(tField.getText()))+System.lineSeparator()+(new PassGen().parse(lengthPass, complexity));
+                    str = (new Transliteration().translit(tField.getText()))+System.lineSeparator()+(new PassGen().genPassword(lengthPass, complexity));
                     area.setText(str);
                 } else JOptionPane.showMessageDialog(rootPane, "В поле \"Длина пароля\" необходимо ввести целое число. Длина пароля должна быть не менее 3 символов");
             }
